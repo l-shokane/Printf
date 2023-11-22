@@ -1,20 +1,16 @@
 #include "main.h"
-
 /**
  * _printf - Outputs a formatted string
- * @fotmat: Character string to print
- *
+ * @format: Character string to print
  * Return: The number of characters printed.
  */
-
 int _printf(const char *format, ...)
 {
 	va_list ogStr;
 	int char_count = 0;
-	
+
 	if (format == NULL)
 		return (-1);
-
 	va_start(ogStr, format);
 
 	while (*format)
@@ -22,14 +18,11 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			
 			if (*format == '\0' || *format == ' ')
 				return (-1);
-
 			if (*format == 'c')
 			{
-				char_count += _printChar(va_arg(ogStr,int));
-
+				char_count += _printChar(va_arg(ogStr, int));
 			}
 			else if (*format == 's')
 			{
@@ -37,7 +30,6 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 'i')
 			{
-		
 				char_count += _printInt(va_arg(ogStr, int));
 			}
 			else if (*format == 'd')
@@ -50,16 +42,11 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				char_count += _printChar("%");
 				char_count += _printChar(*format);
 			}
-
 		}
-
 		format++;
 	}
-
 	va_end(ogStr);
-
 	return (char_count);
 }
